@@ -1,21 +1,8 @@
 ---
 title: "Fernandez Garcia-Agudo et al: scRNAseq analysis"
 author: "Agnes A. Steixner-Kumar"
-date: "10 11 2020"
+date: "26 11 2020"
 output: 
-  html_document: 
-    fig_caption: yes
-    fig_height: 8
-    fig_width: 13
-    number_sections: yes
-    toc: yes
-    toc_float: true
-  html_notebook: 
-    fig_caption: yes
-    fig_height: 8
-    fig_width: 13
-    number_sections: yes
-    toc: yes
   pdf_document:
     latex_engine: xelatex 
     fig_caption: yes
@@ -24,6 +11,19 @@ output:
     keep_tex: no
     number_sections: yes
     toc: yes
+  html_notebook: 
+    fig_caption: yes
+    fig_height: 8
+    fig_width: 13
+    number_sections: yes
+    toc: yes
+  html_document: 
+    fig_caption: yes
+    fig_height: 8
+    fig_width: 13
+    number_sections: yes
+    toc: yes
+    toc_float: true
 editor_options: 
   chunk_output_type: inline
 ---
@@ -34,28 +34,29 @@ Uncomment if notebook location is different from project location to set working
 #wd<-"D:/your_path_to_folder"
 #knitr::opts_knit$set(root.dir = normalizePath(wd))
 ```
+
 Loading libraries required for analyses
 ```{r libraries, echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
 #load required Seurat version, 
 #if you have only the version needed here installed, 
 #you can skip the lib.loc specification
-library(Seurat, lib.loc = "../R/R-4.0.0/library/different_versions/") 
+library(Seurat, lib.loc = "../../R/R-4.0.0/library/different_versions/") 
 library(ggplot2)
 library(monocle)
 ```
 
 # Loading data
 ```{r echo=TRUE, eval = TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
-#load whole hippocampus data (hypoxia vs. normoxia) from Butt et al (2020): GSEXXX
-HYP<-readRDS("Butt_et_al_hypoxia_hippocampus.RDS")
+#load whole hippocampus data (hypoxia vs. normoxia) from Butt et al (2020): GSE162079
+HYP<-readRDS("../Butt_et_al_hypoxia_hippocampus.RDS")
 #load CA1 data (EPO vs. placebo) from Wakhloo et al (2020): GSE144444
-EPO<-readRDS("Wakhloo_et_al_EPO_CA1.RDS")
+EPO<-readRDS("../Wakhloo_et_al_EPO_CA1.RDS")
 #update object to latest Seurat version
 EPO<-UpdateSeuratObject(EPO)
 #load CA1 glutamatergic clusters from Wakhloo et al (2020) 
 #analyzed in pseudotime analysis (Monocle2) 
 #(https://github.com/AgnesSteixner/EPO_Wakhloo_et_al_NATCOMM/tree/master/trajectory)
-mon<-readRDS("Wakhloo_et_al_monocle_pseudotime.RDS")
+mon<-readRDS("../Wakhloo_et_al_monocle_pseudotime.RDS")
 ```
 
 Create dataframe of hypoxia object for plotting
